@@ -105,8 +105,72 @@ const slides = [
   },
   {
     id: 5,
-    type: "summary",
+    type: "comparison",
     label: "Слайд 5",
+    title: "Сравнение типов симметрии",
+    types: [
+      {
+        name: "Лучевая",
+        icon: "RefreshCw",
+        color: "#5BA882",
+        bg: "#E8F5EF",
+        desc: "Совпадение при повороте на угол 360°/n вокруг центра",
+        examples: "Снежинка, морская звезда, цветок",
+        key: "Центр + ось вращения",
+      },
+      {
+        name: "Осевая",
+        icon: "Minus",
+        color: "#7B8FE8",
+        bg: "#EEF0FC",
+        desc: "Совпадение при отражении относительно прямой (оси)",
+        examples: "Лист, бабочка, человеческое тело",
+        key: "Ось отражения",
+      },
+      {
+        name: "Центральная",
+        icon: "Dot",
+        color: "#E8896A",
+        bg: "#FDF0EB",
+        desc: "Совпадение при повороте на 180° вокруг точки",
+        examples: "Буква S, шахматная доска, параллелограмм",
+        key: "Центр поворота",
+      },
+      {
+        name: "Трансляционная",
+        icon: "MoveRight",
+        color: "#B07FD8",
+        bg: "#F5EEFB",
+        desc: "Совпадение при сдвиге на вектор параллельного переноса",
+        examples: "Кирпичная кладка, клетчатая ткань",
+        key: "Вектор переноса",
+      },
+    ],
+    note: "Фигура может обладать несколькими видами симметрии одновременно. Например, снежинка имеет и лучевую, и осевую симметрию.",
+    bg: "from-[#F5F0FF] to-[#F0F5FF]",
+    accent: "#7B8FE8",
+  },
+  {
+    id: 6,
+    type: "architecture",
+    label: "Слайд 6",
+    title: "Симметрия в архитектуре",
+    buildings: [
+      { emoji: "🕌", name: "Купол Пантеона", place: "Рим, Италия", sym: "8-лучевая", desc: "Кессонный потолок с восьмиугольными кассетами образует идеальную радиальную симметрию" },
+      { emoji: "🌹", name: "Окно-роза", place: "Нотр-Дам, Париж", sym: "12-лучевая", desc: "Витражное окно диаметром 10 м с 12-кратной лучевой симметрией" },
+      { emoji: "🕍", name: "Собор Василия Блаженного", place: "Москва, Россия", sym: "4-лучевая", desc: "Четыре пары куполов симметрично расположены вокруг центральной башни" },
+      { emoji: "🏛️", name: "Пантеон", place: "Вашингтон, США", sym: "Осевая + купол", desc: "Колоннада и купол демонстрируют сочетание осевой и радиальной симметрии" },
+      { emoji: "🕋", name: "Тадж-Махал", place: "Агра, Индия", sym: "4-лучевая", desc: "Четыре минарета и сады образуют строгую четырёхкратную симметрию" },
+      { emoji: "🌐", name: "Геодезический купол", place: "Современная архитектура", sym: "Сферическая", desc: "Треугольные грани образуют многолучевую симметрию по поверхности сферы" },
+    ],
+    image: "https://cdn.poehali.dev/projects/547ed932-68cb-4f10-880c-60984ad745dd/files/88a2d7c9-13b3-479b-b479-05deb718fc8f.jpg",
+    bg: "from-[#FFF8F2] to-[#F5F0FF]",
+    accent: "#C47F4A",
+  },
+  {
+    id: 7,
+    type: "summary",
+    label: "Слайд 7",
     title: "Итоги",
     points: [
       { icon: "Star", text: "Лучевая симметрия — поворот фигуры на угол 360°/n вокруг центра" },
@@ -401,6 +465,68 @@ export default function Presentation() {
                     <SymmetryDiagram n={6} />
                   </div>
                 </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* ── COMPARISON ── */}
+        {slide.type === "comparison" && (
+          <div className={`flex flex-col bg-gradient-to-br ${slide.bg}`} style={{ minHeight: 560 }}>
+            <SlideHeader label={slide.label!} title={slide.title!} accent={slide.accent as string} />
+            <div className="flex flex-col gap-4 px-8 pb-6 flex-1">
+              <div className="grid grid-cols-2 gap-3 flex-1">
+                {(slide.types as { name: string; icon: string; color: string; bg: string; desc: string; examples: string; key: string }[]).map((t, i) => (
+                  <div key={i} className="rounded-2xl p-4 flex gap-3" style={{ background: t.bg }}>
+                    <div
+                      className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
+                      style={{ background: `${t.color}22` }}
+                    >
+                      <Icon name={t.icon} size={18} style={{ color: t.color }} />
+                    </div>
+                    <div>
+                      <p className="font-golos font-semibold text-sm mb-0.5" style={{ color: t.color }}>{t.name} симметрия</p>
+                      <p className="font-golos text-[#3A3A3A] text-xs mb-1 leading-relaxed">{t.desc}</p>
+                      <p className="font-golos text-xs text-[#5A5A6A]"><span className="font-semibold">Примеры:</span> {t.examples}</p>
+                      <div className="mt-1.5 inline-block px-2 py-0.5 rounded-full text-xs font-golos" style={{ background: `${t.color}18`, color: t.color }}>{t.key}</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <div className="bg-white/70 rounded-2xl px-5 py-3 flex gap-3 items-center">
+                <Icon name="Info" size={16} style={{ color: slide.accent as string, flexShrink: 0 }} />
+                <p className="font-golos text-xs text-[#4A5A4A] leading-relaxed">{slide.note as string}</p>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* ── ARCHITECTURE ── */}
+        {slide.type === "architecture" && (
+          <div className={`flex flex-col bg-gradient-to-br ${slide.bg}`} style={{ minHeight: 560 }}>
+            <SlideHeader label={slide.label!} title={slide.title!} accent={slide.accent as string} />
+            <div className="flex gap-6 px-8 pb-8 flex-1">
+              <div className="flex-1 grid grid-cols-2 gap-3">
+                {(slide.buildings as { emoji: string; name: string; place: string; sym: string; desc: string }[]).map((b, i) => (
+                  <div key={i} className="bg-white/70 rounded-2xl p-4">
+                    <div className="flex items-center gap-2 mb-2">
+                      <span className="text-2xl">{b.emoji}</span>
+                      <div>
+                        <p className="font-golos font-semibold text-[#2D2A1E] text-sm leading-tight">{b.name}</p>
+                        <p className="font-golos text-xs text-[#8A7A5A]">{b.place}</p>
+                      </div>
+                    </div>
+                    <div className="inline-block px-2 py-0.5 rounded-full text-xs font-golos font-semibold mb-1.5" style={{ background: `${slide.accent}18`, color: slide.accent as string }}>{b.sym}</div>
+                    <p className="font-golos text-xs text-[#4A4A3A] leading-relaxed">{b.desc}</p>
+                  </div>
+                ))}
+              </div>
+              <div className="w-44 flex-shrink-0 flex items-center justify-center">
+                <img
+                  src={slide.image as string}
+                  alt="Архитектура"
+                  className="w-40 h-52 object-cover rounded-2xl shadow-md"
+                />
               </div>
             </div>
           </div>
