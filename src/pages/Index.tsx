@@ -328,19 +328,13 @@ export default function Presentation() {
             </svg>
             <div className="relative z-10 text-center">
               <div className="text-5xl mb-5">✦</div>
-              <p className="font-golos text-xs tracking-[0.3em] uppercase text-[#8BAA8B] mb-3">
-                Геометрия · 7–9 класс
-              </p>
               <h1 className="font-cormorant text-6xl md:text-7xl font-semibold text-[#2D4A3A] leading-tight mb-1">
                 Лучевая
               </h1>
               <h2 className="font-cormorant text-5xl md:text-6xl text-[#5BA882] italic mb-6">
                 симметрия
               </h2>
-              <div className="w-16 h-0.5 bg-[#5BA882] mx-auto mb-5" />
-              <p className="font-golos text-[#6A8A6A] text-base">
-                Образовательная презентация
-              </p>
+              <div className="w-16 h-0.5 bg-[#5BA882] mx-auto" />
             </div>
           </div>
         )}
